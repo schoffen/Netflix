@@ -1,5 +1,6 @@
 package com.example.netflix
 
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.example.netflix.model.Movie
+import com.example.netflix.util.DownloadImageTask
 
 class MovieAdapter(
     private val movies: List<Movie>,
@@ -29,7 +31,12 @@ class MovieAdapter(
 
     inner class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(movie: Movie) {
-            // TODO use server url
+            val imageCover: ImageView = itemView.findViewById(R.id.img_cover)
+            DownloadImageTask(object : DownloadImageTask.Callback {
+                override fun onResult(bitmap: Bitmap) {
+                    imageCover.setImageBitmap(bitmap)
+                }
+            }).execute(movie.coverUrl)
         }
     }
 

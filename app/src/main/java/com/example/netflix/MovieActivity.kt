@@ -13,7 +13,7 @@ import com.example.netflix.model.Movie
 
 class MovieActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMovieBinding
-    //apiKey=91a29451-1dad-419a-81a2-f0c3ceb75603
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMovieBinding.inflate(layoutInflater)
@@ -29,10 +29,6 @@ class MovieActivity : AppCompatActivity() {
         txtCast.text = getString(R.string.cast, "Ator A, Ator B, Atriz C, Atriz D")
 
         val movies = mutableListOf<Movie>()
-        for (i in 0 until 15) {
-            val movie = Movie(R.drawable.movie)
-            movies.add(movie)
-        }
 
         rvSimilar.layoutManager = GridLayoutManager(this, 3)
         rvSimilar.adapter = MovieAdapter(movies, R.layout.item_movie_similar)
