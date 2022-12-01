@@ -1,5 +1,6 @@
 package com.example.netflix
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -25,7 +26,11 @@ class MainActivity : AppCompatActivity(), CategoryTask.Callback {
 
         progressBar = binding.progressMain
 
-        adapter = CategoryAdapter(categories)
+        adapter = CategoryAdapter(categories) { id ->
+            val intent = Intent(this@MainActivity, MovieActivity::class.java)
+            intent.putExtra("id", id)
+            startActivity(intent)
+        }
         val rv = binding.rvMain
         rv.layoutManager = LinearLayoutManager(this)
         rv.adapter = adapter
